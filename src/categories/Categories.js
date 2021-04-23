@@ -76,12 +76,15 @@ const Categories=({hide, setHide})=>{
     const [list, setList]=useState(0);
 
     const nextList=()=>{
-        setHide(true);
-        if(list<lists.length-1){
-            setList(list+1);
-        }else{
-            setList(0);;
-        }
+      // Checking to verify if the final list is displayed.
+      if(list<lists.length-1){
+        setList(list+1);
+        // Looping back to the first list
+      }else{
+        setList(0);;
+      }
+      // Hides the text for the categories after a new list is displayed.
+      setHide(true);
     }
     return(
         <div className='Categories'>
@@ -91,7 +94,9 @@ const Categories=({hide, setHide})=>{
                     <h1>List {lists[list].num}</h1>
                 </div>
                 <ol className="Categories-Main-Display">
+                  {/* Using the Map method to create LIs using the categories for the current list.  The current list is determined by the current value for the list state value. */}
                     {lists[list].categories.map(item=>(
+                      // Using the value for the "hide" state/prop to determine whether the ".hide" class will be applied to the LIs.
                         <li className={hide?'hide':null}>{item}</li>
                     ))}
                 </ol>
